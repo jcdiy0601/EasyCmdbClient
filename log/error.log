@@ -1,0 +1,7 @@
+2018-01-11 15:25:19,232 - ERROR :  10.10.2.10 BasicPlugin Error: Traceback (most recent call last):
+  File "D:\cmdb_client\src\plugins\basic.py", line 48, in linux
+    'os_version': self.os_version(),
+  File "D:\cmdb_client\src\plugins\basic.py", line 21, in os_version
+    output = self.exec_shell_cmd('snmpwalk -v 2c -c %s %s .1.3.6.1.4.1.674.10892.5.1.3.6.0' % (settings.community_name, self.manager_ip)).split('"')[-2]
+IndexError: list index out of range
+
