@@ -9,7 +9,7 @@ from config import settings
 
 
 class CpuPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             response.data = {'cpu_model': None, 'cpu_physical_count': 0, 'cpu_count': 0}
@@ -25,7 +25,7 @@ class CpuPlugin(BasePlugin):
                 cpu_count += int(line.split(':')[-1])
             response.data['cpu_count'] = cpu_count
         except Exception as e:
-            msg = "%s linux cpu plugin error: %s"
+            msg = "%s dell cpu plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())

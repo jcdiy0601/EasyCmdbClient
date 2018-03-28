@@ -9,7 +9,7 @@ from config import settings
 
 
 class MemoryPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             ret = {}
@@ -36,7 +36,7 @@ class MemoryPlugin(BasePlugin):
                 ret[slot]['capacity'] = capacity
             response.data = ret
         except Exception as e:
-            msg = "%s linux memory plugin error: %s"
+            msg = "%s dell memory plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())

@@ -15,7 +15,7 @@ class NicPlugin(BasePlugin):
             interfaces_info = self.linux_interfaces()
             response.data = interfaces_info
         except Exception as e:
-            msg = "%s linux nic plugin error: %s"
+            msg = "%s dell nic plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())

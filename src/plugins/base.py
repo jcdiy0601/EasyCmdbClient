@@ -10,7 +10,7 @@ class BasePlugin(object):
     """
     插件基类
     """
-    def __init__(self, manager_ip=None):
+    def __init__(self, manager_ip=None, info_dict=None):
         # 初始化日志
         self.logger = Logger()
         # 初始化采集类型列表
@@ -25,6 +25,8 @@ class BasePlugin(object):
                 self.manager_ip = manager_ip
                 # 初始化hostname
                 self.hostname = manager_ip
+                # 初始化value_dict
+                self.info_dict = info_dict
         # 如果settings文件中没有MODE变量
         else:
             # 初始化采集类型为Agent
@@ -63,7 +65,7 @@ class BasePlugin(object):
         return output
 
     def execute(self):
-        return self.linux()
+        return self.run()
 
-    def linux(self):
-        raise Exception('必须实现linux方法')
+    def run(self):
+        raise Exception('必须实现run方法')

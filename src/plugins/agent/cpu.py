@@ -15,7 +15,7 @@ class CpuPlugin(BasePlugin):
             output = self.exec_shell_cmd(shell_command)
             response.data = self.parse(output)
         except Exception as e:
-            msg = "%s linux cpu plugin error: %s"
+            msg = "%s dell cpu plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())

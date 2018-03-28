@@ -9,7 +9,7 @@ from config import settings
 
 
 class NicPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             ret = {}
@@ -24,7 +24,7 @@ class NicPlugin(BasePlugin):
                 ret[solt]['macaddress'] = macaddress
             response.data = ret
         except Exception as e:
-            msg = "%s linux nic plugin error: %s"
+            msg = "%s dell nic plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())

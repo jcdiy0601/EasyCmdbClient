@@ -9,7 +9,7 @@ from config import settings
 
 
 class DiskPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             ret = {}
@@ -33,7 +33,7 @@ class DiskPlugin(BasePlugin):
                 ret[slot]['capacity'] = capacity
             response.data = ret
         except Exception as e:
-            msg = "%s linux disk plugin error: %s"
+            msg = "%s dell disk plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())
