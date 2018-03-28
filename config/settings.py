@@ -11,7 +11,7 @@ BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODE = 'snmp'
 
 # 资产信息API
-ASSET_API = 'http://10.10.50.196/cmdb_api/v1/asset'
+ASSET_API = 'http://10.10.30.93/cmdb_api/v1/asset'
 """
 POST时，返回值：{'code': xx, 'message': 'xx'}
  code:
@@ -48,13 +48,22 @@ AGENT_PLUGINS_DICT = {
     'nic': 'src.plugins.agent.nic.NicPlugin',
 }
 
-# snmp采集硬件数据的插件
-SNMP_PLUGINS_DICT = {
-    'cpu': 'src.plugins.snmp.cpu.CpuPlugin',
-    'disk': 'src.plugins.snmp.disk.DiskPlugin',
-    'main_board': 'src.plugins.snmp.main_board.MainBoardPlugin',
-    'memory': 'src.plugins.snmp.memory.MemoryPlugin',
-    'nic': 'src.plugins.snmp.nic.NicPlugin',
+# snmp采集dell设备数据的插件
+SNMP_DELL_PLUGINS_DICT = {
+    'server': {
+        'cpu': 'src.plugins.snmp.dell.server.cpu.CpuPlugin',
+        'disk': 'src.plugins.snmp.dell.server.disk.DiskPlugin',
+        'main_board': 'src.plugins.snmp.dell.server.main_board.MainBoardPlugin',
+        'memory': 'src.plugins.snmp.dell.server.memory.MemoryPlugin',
+        'nic': 'src.plugins.snmp.dell.nic.NicPlugin',
+    }
+}
+
+# snmp采集h3c设备数据的插件
+SNMP_H3C_PLUGINS_DICT = {
+    'switch': {
+        'basic': 'src.plugins.snmp.h3c.switch.basic.BasicPlugin',
+    }
 }
 
 # snmp community name

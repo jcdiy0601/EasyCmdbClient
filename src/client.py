@@ -37,7 +37,7 @@ class AutoBase(object):
     def get_asset(self):
         """
         get方式从api接口获取在线的硬件服务器管理IP
-        :return: {"data": [{"manager_ip": "172.16.99.41"}], "error": null, "message": null, "status": true}
+        :return: {'status': True, 'error': None, 'message': None, 'data': {'10.255.1.21': {'device_type': 'switch', 'manufacturer': 'h3c'}, '10.10.2.10': {'device_type': 'server', 'manufacturer': 'dell'}}}
         :return:
         """
         try:
@@ -120,20 +120,22 @@ class AutoSnmp(AutoBase):
         :return:
         """
         # 获取要通过snmp获取的硬件服务器管理IP
+        # {'status': True, 'error': None, 'message': None, 'data': {'10.255.1.21': {'device_type': 'switch', 'manufacturer': 'h3c'}, '10.10.2.10': {'device_type': 'server', 'manufacturer': 'dell'}}}
         task = self.get_asset()
         # 如果获取失败，写入日志
         if not task['status']:
             Logger().log(task['message'], False)
         # 启动多线程获取数据
         pool = ThreadPoolExecutor(10)
-        for item in task['data']:
-            manager_ip = item['manager_ip']
-            pool.submit(self.run, manager_ip)
+        for key, value in task['data'].items():
+            manager_ip = key
+            info_dict = value
+            pool.submit(self.run, manager_ip, info_dict)
         pool.shutdown(wait=True)
 
-    def run(self, manager_ip):
+    def run(self, manager_ip, info_dict):
         # 获取硬件服务器资产信息
-        server_info = plugins.get_server_info(manager_ip=manager_ip)
+        server_info = plugins.get_server_info(manager_ip=manager_ip, info_dict=info_dict)
         # 序列化获取到的资产
         server_json = Json.dumps(server_info.data)
         # 发送资产数据到api接口
