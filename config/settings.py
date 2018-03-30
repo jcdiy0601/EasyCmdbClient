@@ -33,9 +33,6 @@ ERROR_LOG_FILE = os.path.join(BASEDIR, "log", 'error.log')
 # 运行日志
 RUN_LOG_FILE = os.path.join(BASEDIR, "log", 'run.log')
 
-# Agent模式保存服务器唯一ID的文件
-# CERT_FILE_PATH = os.path.join(BASEDIR, 'config', 'cert')
-
 # Agent模式服务器唯一值hostname
 HOSTNAME = 'fthw-cmdb-test-web1_192.168.222.10'
 
@@ -43,7 +40,6 @@ HOSTNAME = 'fthw-cmdb-test-web1_192.168.222.10'
 AGENT_PLUGINS_DICT = {
     'cpu': 'src.plugins.agent.cpu.CpuPlugin',
     'disk': 'src.plugins.agent.disk.DiskPlugin',
-    # 'main_board': 'src.plugins.agent.main_board.MainBoardPlugin',
     'memory': 'src.plugins.agent.memory.MemoryPlugin',
     'nic': 'src.plugins.agent.nic.NicPlugin',
 }
@@ -63,6 +59,16 @@ SNMP_DELL_PLUGINS_DICT = {
 SNMP_H3C_PLUGINS_DICT = {
     'switch': {
         'basic': 'src.plugins.snmp.h3c.switch.basic.BasicPlugin',
+    },
+    'firewall': {
+        'basic': 'src.plugins.snmp.h3c.firewall.basic.BasicPlugin',
+    }
+}
+
+# snmp采集juniper设备数据的插件
+SNMP_JUNIPER_PLUGINS_DICT = {
+    'firewall': {
+        'basic': 'src.plugins.snmp.juniper.firewall.basic.BasicPlugin',
     }
 }
 

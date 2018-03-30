@@ -9,7 +9,7 @@ import re
 
 
 class BasicPlugin(BasePlugin):
-    """获取h3c交换机信息"""
+    """获取h3c防火墙信息"""
     def run(self):
         response = BaseResponse()
         try:
@@ -30,14 +30,14 @@ class BasicPlugin(BasePlugin):
             temp = self.exec_shell_cmd('snmpwalk -v 2c -c %s %s .1.3.6.1.2.1.1.5.0' % (settings.community_name, self.manager_ip))
             device_name = temp.split(':')[-1].strip()
             response.data['device_name'] = device_name
-            temp = self.exec_shell_cmd('snmpwalk -v 2c -c %s %s .1.3.6.1.2.1.47.1.1.1.1.2.2' % (settings.community_name, self.manager_ip))
+            temp = self.exec_shell_cmd('snmpwalk -v 2c -c %s %s .1.3.6.1.2.1.47.1.1.1.1.13.1' % (settings.community_name, self.manager_ip))
             model = temp.split('"')[1].split()[1].strip()
             response.data['model'] = model
             temp = self.exec_shell_cmd('snmpwalk -v 2c -c %s %s .1.3.6.1.2.1.1.1.0' % (settings.community_name, self.manager_ip))
             basic_info = temp.split(':')[-1].strip()
             response.data['basic_info'] = basic_info
         except Exception as e:
-            msg = "%s h3c switch plugin error: %s"
+            msg = "%s h3c firewall plugin error: %s"
             self.logger.log(msg % (self.hostname, traceback.format_exc()), False)
             response.status = False
             response.error = msg % (self.hostname, traceback.format_exc())
