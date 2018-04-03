@@ -8,7 +8,7 @@ from lib.response import BaseResponse
 
 
 class CpuPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             shell_command = 'cat /proc/cpuinfo'

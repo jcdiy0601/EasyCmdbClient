@@ -8,7 +8,7 @@ from lib.response import BaseResponse
 
 
 class DiskPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             shell_command = 'df -Pkl|grep -v Filesystem|grep -v "文件系统"'

@@ -9,7 +9,7 @@ from lib.response import BaseResponse
 
 
 class NicPlugin(BasePlugin):
-    def linux(self):
+    def run(self):
         response = BaseResponse()
         try:
             interfaces_info = self.linux_interfaces()

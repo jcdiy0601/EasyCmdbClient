@@ -51,7 +51,7 @@ SNMP_DELL_PLUGINS_DICT = {
         'disk': 'src.plugins.snmp.dell.server.disk.DiskPlugin',
         'main_board': 'src.plugins.snmp.dell.server.main_board.MainBoardPlugin',
         'memory': 'src.plugins.snmp.dell.server.memory.MemoryPlugin',
-        'nic': 'src.plugins.snmp.dell.nic.NicPlugin',
+        'nic': 'src.plugins.snmp.dell.server.nic.NicPlugin',
     }
 }
 
